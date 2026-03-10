@@ -11,7 +11,8 @@ top:0;
 left:0;
 width:100%;
 height:100%;
-background:#000;
+background:rgba(0,0,0,0.85);
+backdrop-filter:blur(2px);
 display:flex;
 align-items:center;
 justify-content:center;
@@ -230,36 +231,58 @@ Jonah's Bookmarklet Hacks • Drag → Save → Click → Hack
 
 <script>
 
-const PASSWORD_HASHES = [
+console.log("Login system loading...");
 
+const PASSWORD_HASHES = [
 "2bb80d537b1da3e38bd30361aa855686bde0ba1f64f3f7f8b5f6e0e4f5f1d6d2",
 "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd5a6f7c0e0d0f0c0b1"
-
 ];
-// add more hashes here
 
+console.log("Loaded hashes:", PASSWORD_HASHES);
 
 async function sha256(text){
+
+console.log("Hashing password...");
+
 const encoder = new TextEncoder();
 const data = encoder.encode(text);
+
 const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+
 const hashArray = Array.from(new Uint8Array(hashBuffer));
-return hashArray.map(b => b.toString(16).padStart(2,'0')).join('');
+
+const hash = hashArray.map(b => b.toString(16).padStart(2,'0')).join('');
+
+console.log("Generated hash:", hash);
+
+return hash;
+
 }
 
 
 async function login(){
 
+console.log("Login attempt");
+
 const password = document.getElementById("passwordInput").value;
+
+console.log("Password entered:", password);
+
 const hash = await sha256(password);
 
+console.log("Checking hash against list...");
+
 if(PASSWORD_HASHES.includes(hash)){
+
+console.log("ACCESS GRANTED");
 
 localStorage.setItem("jbmh_logged_in","true");
 
 document.getElementById("loginScreen").style.display="none";
 
 }else{
+
+console.log("ACCESS DENIED");
 
 document.getElementById("loginMsg").innerText="ACCESS DENIED";
 
@@ -269,9 +292,13 @@ document.getElementById("loginMsg").innerText="ACCESS DENIED";
 
 
 if(localStorage.getItem("jbmh_logged_in")==="true"){
+
+console.log("Already logged in");
+
 window.addEventListener("load",()=>{
 document.getElementById("loginScreen").style.display="none";
 });
+
 }
 
 </script>
