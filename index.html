@@ -231,18 +231,15 @@ Jonah's Bookmarklet Hacks • Drag → Save → Click → Hack
 
 <script>
 
-console.log("Login system loading...");
+console.log("Login system starting...");
 
 const PASSWORD_HASHES = [
-"2bb80d537b1da3e38bd30361aa855686bde0eacd7162fef6a25fe97bf527a25b",
-"5e884898da28047151d0e56f8dc6292773603d0d6aabbdd5a6f7c0e0d0f0c0b1"
+"9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08"
 ];
 
-console.log("Loaded hashes:", PASSWORD_HASHES);
+console.log("Valid hashes:", PASSWORD_HASHES);
 
 async function sha256(text){
-
-console.log("Hashing password...");
 
 const encoder = new TextEncoder();
 const data = encoder.encode(text);
@@ -251,10 +248,7 @@ const hashBuffer = await crypto.subtle.digest("SHA-256", data);
 
 const hashArray = Array.from(new Uint8Array(hashBuffer));
 
-const hash = hashArray.map(b => b.toString(16).padStart(2,'0')).join('');
-
-console.log("Generated hash:", hash);
-console.log("Comparing", hash, "to:", PASSWORD_HASHES)
+const hash = hashArray.map(b => b.toString(16).padStart(2,"0")).join("");
 
 return hash;
 
@@ -263,17 +257,22 @@ return hash;
 
 async function login(){
 
-console.log("Login attempt");
+let password = document.getElementById("passwordInput").value;
 
-const password = document.getElementById("passwordInput").value;
+/* remove invisible characters */
+password = password.trim();
 
-console.log("Password entered:", password);
+console.log("Password entered:", `"${password}"`);
 
 const hash = await sha256(password);
 
-console.log("Checking hash against list...");
+console.log("Generated hash:", hash);
 
-if(PASSWORD_HASHES.includes(hash)){
+const match = PASSWORD_HASHES.some(h => h.toLowerCase() === hash.toLowerCase());
+
+console.log("Match result:", match);
+
+if(match){
 
 console.log("ACCESS GRANTED");
 
@@ -285,16 +284,25 @@ document.getElementById("loginScreen").style.display="none";
 
 console.log("ACCESS DENIED");
 
-document.getElementById("loginMsg").innerText="ACCESS DENIED";
+document.getElementById("loginMsg").innerText = "ACCESS DENIED";
 
 }
 
 }
 
 
+/* allow pressing enter */
+document.addEventListener("keydown", function(e){
+
+if(e.key === "Enter"){
+login();
+}
+
+});
+
+
+/* auto login if stored */
 if(localStorage.getItem("jbmh_logged_in")==="true"){
-
-console.log("Already logged in");
 
 window.addEventListener("load",()=>{
 document.getElementById("loginScreen").style.display="none";
@@ -311,7 +319,7 @@ const ctx = canvas.getContext("2d");
 canvas.height = window.innerHeight;
 canvas.width = window.innerWidth;
 
-const letters = "01ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const letters = "01ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_-+={[}]|:;'<,>.?/";
 const fontSize = 14;
 const columns = canvas.width / fontSize;
 
