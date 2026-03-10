@@ -59,7 +59,6 @@ z-index:-1;
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
     gap:15px;
-    column-gap:20px;
 }
 
 .bookmarklet{
@@ -70,7 +69,7 @@ z-index:-1;
     text-decoration:none;
     color:#00ff9c;
     text-align:center;
-    transition:.1s;
+    transition:.15s;
 }
 
 .bookmarklet:hover{
@@ -153,7 +152,11 @@ Blooket GUI
 </br>
 <a class="bookmarklet"
 href="javascript:%20delay=prompt(%22Enter%20delay%20(ms).%20Any%20faster%20(less)%20than%20~60%20and%20typingclub%20may%20not%20register%22);%20/*Educational%20purposes*/%20var%20rawElements%20=%20document.getElementsByClassName(%22token_unit%22);var%20listElements%20=%20Array.from(rawElements);%20var%20letterList%20=%20%5B%5D;%20listElements.forEach(item%20=%3E%20letterList.push(item.innerHTML.replace(/%3C%5C/?%5B%5E%3E%5D+(%3E%7C$)/g,%20%22%22)));%20var%20strippedLetterList%20=%20letterList.map(function(x)%7Breturn%20x.trim().replace(/&nbsp;/g,%20%22%20%22).replace(/&amp/g,%22&%22).replace(/&lt;/g,%22%3C%22).replace(/&gt;/g,%22%3E%22).replace(/&%2309;/g,%22%20%22).replace(/&%2313;/g,%22%20%22);%7D);%20for%20(let%20i%20=%200;%20i%20%3C%20strippedLetterList.length;%20i++)%20%7BsetTimeout(function()%7Bwindow.core.record_keydown_time(strippedLetterList%5Bi%5D)%7D,%20delay*i)%7D;">
-EdClub Typing
+EdClub Auto Typer
+</a>
+</br>
+<a class="bookmarklet" href="javascript:(async%20function()%7B(function%20autoSolveLoop()%20%7B%0A%20%20console.log(%22Auto-solver%20started.%22);%0A%0A%20%20const%20interval%20=%20setInterval(()%20=%3E%20%7B%0A%0A%20%20%20%20%0A%20%20%20%20const%20cards%20=%20document.querySelectorAll('div.cards%20x-integer-input-card:not(%5Bhidden=%22true%22%5D)');%0A%0A%20%20%20%20if%20(cards.length%20===%200)%20%7B%0A%20%20%20%20%20%20console.log(%22No%20more%20visible%20cards.%20Auto-solver%20stopped.%22);%0A%20%20%20%20%20%20clearInterval(interval);%0A%20%20%20%20%20%20return;%0A%20%20%20%20%7D%0A%0A%20%20%20%20%0A%20%20%20%20const%20card%20=%20cards%5Bcards.length%20-%201%5D;%0A%0A%20%20%20%20%0A%20%20%20%20const%20answerDivs%20=%20card.querySelectorAll('div.answer%20%3E%20div:not(%5Bhidden=%22true%22%5D)');%0A%0A%20%20%20%20if%20(answerDivs.length%20===%200)%20%7B%0A%20%20%20%20%20%20console.warn('No%20visible%20answer%20div%20in%20card.%20Waiting...');%0A%20%20%20%20%20%20return;%0A%20%20%20%20%7D%0A%0A%20%20%20%20%0A%20%20%20%20const%20targetDiv%20=%20answerDivs%5BanswerDivs.length%20-%201%5D;%0A%0A%20%20%20%20%0A%20%20%20%20const%20numbers%20=%20targetDiv.textContent.match(/-?%5Cd+/g);%0A%0A%20%20%20%20if%20(!numbers%20%7C%7C%20numbers.length%20%3C%202)%20%7B%0A%20%20%20%20%20%20console.warn('Could%20not%20extract%20numbers.%20Waiting...');%0A%20%20%20%20%20%20return;%0A%20%20%20%20%7D%0A%0A%20%20%20%20const%20num1%20=%20parseInt(numbers%5B0%5D,%2010);%0A%20%20%20%20const%20num2%20=%20parseInt(numbers%5B1%5D,%2010);%0A%20%20%20%20const%20result%20=%20num1%20*%20num2;%0A%0A%20%20%20%20console.log(%60Detected:%20$%7Bnum1%7D%20×%20$%7Bnum2%7D%20=%20$%7Bresult%7D%60);%0A%0A%20%20%20%20%0A%20%20%20%20const%20input%20=%20card.querySelector('input%5Btype=%22number%22%5D');%0A%20%20%20%20if%20(!input)%20%7B%0A%20%20%20%20%20%20console.warn('Input%20not%20found.%20Waiting...');%0A%20%20%20%20%20%20return;%0A%20%20%20%20%7D%0A%0A%20%20%20%20const%20nativeSetter%20=%20Object.getOwnPropertyDescriptor(%0A%20%20%20%20%20%20window.HTMLInputElement.prototype,%0A%20%20%20%20%20%20%22value%22%0A%20%20%20%20).set;%0A%0A%20%20%20%20nativeSetter.call(input,%20result);%0A%20%20%20%20input.dispatchEvent(new%20Event('input',%20%7B%20bubbles:%20true%20%7D));%0A%20%20%20%20input.dispatchEvent(new%20Event('change',%20%7B%20bubbles:%20true%20%7D));%0A%0A%20%20%20%20%0A%20%20%20%20const%20checkButton%20=%20document.querySelector('.btn-row%20button%5Bdata-check%5D');%0A%20%20%20%20if%20(checkButton)%20%7B%0A%20%20%20%20%20%20checkButton.dispatchEvent(new%20MouseEvent('click',%20%7B%20bubbles:%20true,%20cancelable:%20true,%20view:%20window%20%7D));%0A%20%20%20%20%20%20console.log('Clicked%20Check%20button');%0A%20%20%20%20%7D%0A%0A%20%20%20%20%0A%20%20%20%20const%20nextButton%20=%20document.querySelector('.btn-row%20button%5Bdata-next%5D:not(%5Bdisabled%5D)');%0A%20%20%20%20if%20(nextButton)%20%7B%0A%20%20%20%20%20%20nextButton.dispatchEvent(new%20MouseEvent('click',%20%7B%20bubbles:%20true,%20cancelable:%20true,%20view:%20window%20%7D));%0A%20%20%20%20%20%20console.log('Clicked%20Next%20button');%0A%20%20%20%20%7D%0A%0A%20%20%7D,%2050);%20%0A%0A%7D)();%7D)()">
+Fluency By Heart Auto
 </a>
 </br>
 <a class="bookmarklet" href="javascript:alert('Example code by Jonah!')">
