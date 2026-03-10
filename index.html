@@ -127,6 +127,7 @@ footer{
     padding:20px;
     border-top:1px solid #00ff9c;
     font-size:14px;
+    background:#000;
 }
 </style>
 </head>
@@ -135,14 +136,20 @@ footer{
 
 <div id="loginScreen">
 <div id="loginBox">
-<h2>ACCESS TERMINAL</h2>
-<p>Enter password</p>
 
+<h2>ACCESS TERMINAL</h2>
+
+<p>Username</p>
+<input type="text" id="usernameInput">
+
+<p>Password</p>
 <input type="password" id="passwordInput">
+
 <br>
 <button onclick="login()">Login</button>
 
 <p id="loginMsg"></p>
+
 </div>
 </div>
 
@@ -227,17 +234,39 @@ EXAMPLE DOES NOTHING
 
 <footer>
 Jonah's Bookmarklet Hacks • Drag → Save → Click → Hack
+<br><br>
+<button onclick="logout()" style="
+background:black;
+border:1px solid #00ff9c;
+color:#00ff9c;
+padding:6px 12px;
+cursor:pointer;
+font-family:monospace;
+">
+Log Out
+</button>
 </footer>
 
 <script>
 
-console.log("Login system starting...");
+console.log("Login system starting");
 
-const PASSWORD_HASHES = [
+/*
+USERNAME HASH -> PASSWORD HASH
+*/
+const USERS = {
+
+"5e884898da28047151d0e56f8dc6292773603d0d6aabbdd5a6f7c0e0d0f0c0b1":
 "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08"
-];
 
-console.log("Valid hashes:", PASSWORD_HASHES);
+/*
+example only
+username: password
+password: test
+*/
+
+};
+
 
 async function sha256(text){
 
@@ -248,31 +277,37 @@ const hashBuffer = await crypto.subtle.digest("SHA-256", data);
 
 const hashArray = Array.from(new Uint8Array(hashBuffer));
 
-const hash = hashArray.map(b => b.toString(16).padStart(2,"0")).join("");
-
-return hash;
+return hashArray.map(b => b.toString(16).padStart(2,"0")).join("");
 
 }
 
 
 async function login(){
 
-let password = document.getElementById("passwordInput").value;
+console.log("Login attempt");
 
-/* remove invisible characters */
-password = password.trim();
+let username = document.getElementById("usernameInput").value.trim();
+let password = document.getElementById("passwordInput").value.trim();
 
-console.log("Password entered:", `"${password}"`);
+console.log("Username entered:", username);
 
-const hash = await sha256(password);
+const usernameHash = await sha256(username);
+const passwordHash = await sha256(password);
 
-console.log("Generated hash:", hash);
+console.log("Username hash:", usernameHash);
+console.log("Password hash:", passwordHash);
 
-const match = PASSWORD_HASHES.some(h => h.toLowerCase() === hash.toLowerCase());
+if(!(usernameHash in USERS)){
 
-console.log("Match result:", match);
+console.log("Username not found");
 
-if(match){
+document.getElementById("loginMsg").innerText = "USER NOT FOUND";
+
+return;
+
+}
+
+if(USERS[usernameHash] === passwordHash){
 
 console.log("ACCESS GRANTED");
 
@@ -282,16 +317,28 @@ document.getElementById("loginScreen").style.display="none";
 
 }else{
 
-console.log("ACCESS DENIED");
+console.log("WRONG PASSWORD");
 
-document.getElementById("loginMsg").innerText = "ACCESS DENIED";
-
-}
+document.getElementById("loginMsg").innerText = "WRONG PASSWORD";
 
 }
 
+}
 
-/* allow pressing enter */
+
+function logout(){
+
+console.log("Logging out");
+
+localStorage.removeItem("jbmh_logged_in");
+
+location.reload();
+
+}
+
+
+/* enter key support */
+
 document.addEventListener("keydown", function(e){
 
 if(e.key === "Enter"){
@@ -301,7 +348,8 @@ login();
 });
 
 
-/* auto login if stored */
+/* remember login */
+
 if(localStorage.getItem("jbmh_logged_in")==="true"){
 
 window.addEventListener("load",()=>{
