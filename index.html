@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Jonah's Best Bookmarklet Hacks</title>
+
+<style>
+body{
+    background:#0a0a0a;
+    color:#00ff9c;
+    font-family: "Courier New", monospace;
+    margin:0;
+}
+
+header{
+    background:#000;
+    border-bottom:2px solid #00ff9c;
+    padding:20px;
+    text-align:center;
+}
+
+h1{
+    margin:0;
+    font-size:32px;
+}
+
+.container{
+    max-width:900px;
+    margin:auto;
+    padding:20px;
+}
+
+.section{
+    border:1px solid #00ff9c;
+    padding:20px;
+    margin-bottom:25px;
+    background:#050505;
+}
+
+.section h2{
+    margin-top:0;
+}
+
+.steps{
+    line-height:1.7;
+}
+
+.bookmarklets{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:15px;
+}
+
+.bookmarklet{
+    display:block;
+    padding:12px;
+    background:#000;
+    border:1px solid #00ff9c;
+    text-decoration:none;
+    color:#00ff9c;
+    text-align:center;
+    transition:.2s;
+}
+
+.bookmarklet:hover{
+    background:#00ff9c;
+    color:#000;
+}
+
+.tip{
+    margin-top:10px;
+    font-size:14px;
+    color:#88ffcc;
+}
+
+footer{
+    text-align:center;
+    padding:20px;
+    border-top:1px solid #00ff9c;
+    font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>⚡ Jonah's Best Bookmarklet Hacks ⚡</h1>
+<p>Drag hacks into your bookmarks bar and run them anywhere</p>
+</header>
+
+<div class="container">
+
+<div class="section">
+<h2>📌 Setup (Important)</h2>
+
+<div class="steps">
+1. Turn on your browser's <b>Favourites / Bookmarks Bar</b>.
+<br><br>
+
+<b>Chrome / Edge:</b> Press <code>Ctrl + Shift + B</code>
+<br>
+<b>Safari:</b> View → Show Favourites Bar
+<br>
+<b>Firefox:</b> View → Toolbars → Bookmarks Toolbar
+<br><br>
+
+2. Right click the bar → <b>New Folder</b>
+<br><br>
+
+3. Name the folder:
+<br><br>
+
+<code>Nothing</code>
+<br><br>
+
+4. Drag the cheats below into the <b>Nothing</b> folder.
+<br><br>
+
+5. When you're on the site you want, click the bookmark to run the hack.
+</div>
+
+<p class="tip">Tip: You can add as many cheats as you want to the folder.</p>
+
+</div>
+
+
+<div class="section">
+<h2>🧪 Bookmarklet Hacks (Drag These)</h2>
+
+<p>Drag any of these buttons to your <b>Nothing</b> folder.</p>
+
+<div class="bookmarklets">
+
+<a class="bookmarklet"
+href="javascript:alert('Example Hack 1 Activated')">
+Example Hack 1
+</a>
+
+<a class="bookmarklet"
+href="javascript:alert('Example Hack 2 Activated')">
+Example Hack 2
+</a>
+
+<a class="bookmarklet"
+href="javascript:alert('Example Hack 3 Activated')">
+Example Hack 3
+</a>
+
+</div>
+
+<p class="tip">
+To add more cheats later, just copy one of the links above and change the code inside <code>href="javascript:..."</code>.
+</p>
+
+</div>
+
+
+<div class="section">
+<h2>➕ Adding Your Own Cheats</h2>
+
+<p>To add a new bookmarklet:</p>
+
+<pre>
+&lt;a class="bookmarklet"
+href="javascript:YOUR_CODE_HERE"&gt;
+Cheat Name
+&lt;/a&gt;
+</pre>
+
+<p>
+Put it inside the <b>bookmarklets</b> section and it will automatically appear as a draggable hack.
+</p>
+
+</div>
+
+</div>
+
+<footer>
+Jonah's Bookmarklet Hacks • Drag → Save → Click → Hack
+</footer>
+
+</body>
+</html>
