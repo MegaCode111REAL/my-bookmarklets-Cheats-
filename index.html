@@ -234,7 +234,7 @@ Jonah's Bookmarklet Hacks • Drag → Save → Click → Hack
 console.log("Login system loading...");
 
 const PASSWORD_HASHES = [
-"2bb80d537b1da3e38bd30361aa855686bde0ba1f64f3f7f8b5f6e0e4f5f1d6d2",
+"2bb80d537b1da3e38bd30361aa855686bde0eacd7162fef6a25fe97bf527a25b",
 "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd5a6f7c0e0d0f0c0b1"
 ];
 
@@ -254,6 +254,7 @@ const hashArray = Array.from(new Uint8Array(hashBuffer));
 const hash = hashArray.map(b => b.toString(16).padStart(2,'0')).join('');
 
 console.log("Generated hash:", hash);
+console.log("Comparing", hash, "to:", PASSWORD_HASHES)
 
 return hash;
 
