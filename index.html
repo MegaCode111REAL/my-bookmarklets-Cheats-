@@ -377,8 +377,8 @@ document.querySelectorAll("[data-id]").forEach(el=>{
 
 const id = el.getAttribute("data-id");
 
-if(!allowed.includes(id)){
-el.style.display="none";
+if (!allowed.includes(id) && id !== "eruda" && id !== "hax") {
+    el.style.display = "none";
 }
 
 });
