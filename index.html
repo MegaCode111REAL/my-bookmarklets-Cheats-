@@ -225,6 +225,10 @@ Fluency By Heart Auto
 Browser Console
 </a>
 </br>
+<a class="bookmarklet" data-id="hax" href="javascript:(async%20function()%7B%0A%0Aalert(%22%E2%9A%A0%20Jonah%20has%20arrived%20%E2%9A%A0%22);%0A%0Alet%20chaosLevel%20=%201;%0A%0Aconst%20sites%20=%20%5B%0A%20%22https://example.com%22,%0A%20%22https://wikipedia.org%22,%0A%20%22https://youtube.com%22,%0A%20%22https://google.com%22,%0A%20%22https://bing.com%22,%0A%20%22https://duckduckgo.com%22%0A%5D;%0A%0A%0AsetInterval(()=%3E%7B%0A%20%20%20%20chaosLevel++;%0A%20%20%20%20console.log(%22Chaos%20level:%22,%20chaosLevel);%0A%7D,4000);%0A%0A%0A%0AsetInterval(()=%3E%7B%0A%20%20%20%20document.title%20=%0A%20%20%20%20%22%F0%9F%92%BB%20Jonah%20is%20the%20best%20hacker%20%F0%9F%92%BB%20%22%20+%20Math.floor(Math.random()*9999);%0A%7D,400);%0A%0A%0A%0A%0Aconst%20movers%20=%20%5B%5D;%0A%0Afunction%20addMover(el)%7B%0A%0A%20%20%20%20const%20rect%20=%20el.getBoundingClientRect();%0A%0A%20%20%20%20movers.push(%7B%0A%20%20%20%20%20%20%20%20el,%0A%20%20%20%20%20%20%20%20x:%20rect.left,%0A%20%20%20%20%20%20%20%20y:%20rect.top,%0A%20%20%20%20%20%20%20%20vx:%20(Math.random()*2+1)*(Math.random()%3C0.5?-1:1),%0A%20%20%20%20%20%20%20%20vy:%20(Math.random()*2+1)*(Math.random()%3C0.5?-1:1),%0A%20%20%20%20%20%20%20%20w:%20rect.width,%0A%20%20%20%20%20%20%20%20h:%20rect.height%0A%20%20%20%20%7D);%0A%0A%20%20%20%20el.style.position=%22fixed%22;%0A%20%20%20%20el.style.margin=%220%22;%0A%7D%0A%0Afunction%20animate()%7B%0A%20%20%20%20movers.forEach(m=%3E%7B%0A%20%20%20%20%20%20%20%20const%20speedBoost%20=%201%20+%20chaosLevel%20*%200.05;%0A%20%20%20%20%20%20%20%20m.x%20+=%20m.vx%20*%20speedBoost;%0A%20%20%20%20%20%20%20%20m.y%20+=%20m.vy%20*%20speedBoost;%0A%0A%20%20%20%20%20%20%20%20if(m.x%20%3C%200%20%7C%7C%20m.x%20+%20m.w%20%3E%20window.innerWidth)%20m.vx%20*=%20-1;%0A%20%20%20%20%20%20%20%20if(m.y%20%3C%200%20%7C%7C%20m.y%20+%20m.h%20%3E%20window.innerHeight)%20m.vy%20*=%20-1;%0A%0A%20%20%20%20%20%20%20%20m.el.style.left%20=%20m.x%20+%20%22px%22;%0A%20%20%20%20%20%20%20%20m.el.style.top%20=%20m.y%20+%20%22px%22;%0A%20%20%20%20%7D);%0A%0A%20%20%20%20requestAnimationFrame(animate);%0A%7D%0A%0Aanimate();%0A%0A%0A%0A%0Afunction%20spawnPopup()%7B%0A%20%20%20%20const%20msg%20=%20document.createElement(%22div%22);%0A%20%20%20%20msg.innerText%20=%20%22JONAH%20IS%20THE%20BEST%20HACKER%22;%0A%0A%20%20%20%20msg.style.position=%22fixed%22;%0A%20%20%20%20msg.style.left%20=%20Math.random()*80+%22vw%22;%0A%20%20%20%20msg.style.top%20=%20Math.random()*80+%22vh%22;%0A%20%20%20%20msg.style.fontSize=%2228px%22;%0A%20%20%20%20msg.style.fontWeight=%22bold%22;%0A%20%20%20%20msg.style.color=%22hsl(%22+Math.random()*360+%22,100%25,50%25)%22;%0A%20%20%20%20msg.style.zIndex=999999;%0A%0A%20%20%20%20document.body.appendChild(msg);%0A%0A%20%20%20%20addMover(msg);%0A%7D%0A%0AsetInterval(()=%3E%7B%0A%20%20%20%20if(Math.random()%20%3C%200.35)%7B%0A%20%20%20%20%20%20%20%20spawnPopup();%0A%20%20%20%20%7D%0A%7D,800);%0A%0A%0A%0A%0AsetInterval(()=%3E%7B%0A%20%20%20%20const%20candidates%20=%20document.querySelectorAll(%22img,button,h1,h2,h3%22);%0A%20%20%20%20if(!candidates.length)%20return;%0A%20%20%20%20const%20el%20=%20candidates%5BMath.floor(Math.random()*candidates.length)%5D;%0A%20%20%20%20if(!movers.find(m=%3Em.el%20===%20el))%7B%0A%20%20%20%20%20%20%20%20addMover(el);%0A%20%20%20%20%7D%0A%7D,3000);%0A%0A%0A%0A%0Afunction%20messWithText()%7B%0A%20%20%20%20const%20els%20=%20document.querySelectorAll(%22p,span,li,a%22);%0A%20%20%20%20if(!els.length)%20return;%0A%20%20%20%20const%20el%20=%20els%5BMath.floor(Math.random()*els.length)%5D;%0A%20%20%20%20if(el.innerText%20&&%20el.innerText.length%20%3C%20200)%7B%0A%20%20%20%20%20%20%20%20el.innerText%20=%20%22%F0%9F%92%BB%20Jonah%20is%20the%20best%20hacker%20%F0%9F%92%BB%22;%0A%20%20%20%20%7D%0A%7D%0A%0AsetInterval(()=%3E%7B%0A%20%20%20%20if(Math.random()%20%3C%200.4)%7B%0A%20%20%20%20%20%20%20%20messWithText();%0A%20%20%20%20%7D%0A%7D,900);%0A%0A%0A%0A%0AsetInterval(()=%3E%7B%0A%20%20%20%20if(Math.random()%20%3C%200.25)%7B%0A%20%20%20%20%20%20%20%20document.body.style.background%20=%0A%20%20%20%20%20%20%20%20%22hsl(%22+Math.floor(Math.random()*360)+%22,70%25,60%25)%22;%0A%20%20%20%20%7D%0A%7D,1500);%0A%0A%0A%0A%0AsetInterval(()=%3E%7B%0A%20%20%20%20const%20all%20=%20document.querySelectorAll(%22*%22);%0A%20%20%20%20all.forEach(el=%3E%7B%0A%20%20%20%20%20%20%20%20if(Math.random()%20%3C%200.15)%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20const%20color%20=%20%22hsl(%22+Math.floor(Math.random()*360)+%22,80%25,50%25)%22;%0A%20%20%20%20%20%20%20%20%20%20%20%20el.style.color%20=%20color;%0A%20%20%20%20%20%20%20%20%20%20%20%20el.style.borderColor%20=%20color;%0A%20%20%20%20%20%20%20%20%20%20%20%20el.style.backgroundColor%20=%20Math.random()%3C0.3?color:el.style.backgroundColor;%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D);%0A%7D,700);%0A%0A%0A%0A%0AsetTimeout(()=%3E%7B%0A%20%20%20%20setInterval(()=%3E%7B%0A%20%20%20%20%20%20%20%20const%20site%20=%20sites%5BMath.floor(Math.random()*sites.length)%5D;%0A%20%20%20%20%20%20%20%20window.open(site,%22_blank%22);%0A%20%20%20%20%7D,5000);%0A%7D,30000);%7D)()">
+..?
+</a>
+</br>
 <a class="bookmarklet" data-id="example" href="javascript:alert('Example code by Jonah!')">
 EXAMPLE DOES NOTHING
 </a>
@@ -265,32 +269,32 @@ const USERS = {
 
 "7cadab457ad8d811f134612436daaa5e5914b20dc2502865f714035b0f267680":{
 password:"cf27ff6d0a0d9d1df0aefa164c769cdd23862675ddf056b0f01fc2b644da55c5",
-allowed:["ttrs","edclub","example"]
+allowed:["ttrs","edclub","example","hax"]
 },
 
 "b2d60d92ca43aa51a0c91ba9fd774aa9a80b5fdf9b6685e0e4c23fc75035db43":{
 password:"8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918",
-allowed:["ttrs","amplify","example","blooket","edclub","eruda"]
+allowed:["ttrs","amplify","example","blooket","edclub","eruda","hax"]
 },
 
 "9390298f3fb0c5b160498935d79cb139aef28e1c47358b4bbba61862b9c26e59":{
 password:"408f31d86c6bf4a8aff4ea682ad002278f8cb39dc5f37b53d343e63a61f3cc4f",
-allowed:["amplify","blooket"]
+allowed:["amplify","blooket","hax"]
 },
 
 "31611159e7e6ff7843ea4627745e89225fc866621cfcfdbd40871af4413747cc":{
 password:"d3d621ec7cf47c715c05461627a2bd49b5ec6400bdda01112168af9b56e1d35c",
-allowed:["ttrs","edclub"]
+allowed:["ttrs","edclub","hax"]
 },
 
 "a60946cfbced6c968698c327d1640b9153ea014020e96c619e71436ecdccc494":{
 password:"ec71f5c39a2cf0280c4d1236079e0f7402c8b58ef370ae8a5a999c09b5665bf5",
-allowed:["blooket","example","eruda"]
+allowed:["blooket","example","eruda","hax"]
 },
 
 "ffee573832ddc7ae8a6f2d51c6de37d06238a7ed6027be9200f189fc258a3471":{
 password:"63306bd78162a6eb920e4d4443d56266b17b094907a7becb7c83c9a4924dd156",
-allowed:["ttrs","edclub","amplify","blooket","example"]
+allowed:["ttrs","edclub","amplify","blooket","example","hax"]
 }
 
 };
@@ -373,11 +377,9 @@ document.querySelectorAll("[data-id]").forEach(el=>{
 
 const id = el.getAttribute("data-id");
 
-/*
 if(!allowed.includes(id)){
 el.style.display="none";
 }
-*/
 
 });
 
